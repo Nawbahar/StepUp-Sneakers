@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - StepUp Sneakers</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="index.html">
+                StepUp Sneakers
+            </a>
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#about">About Us</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#products">Images</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="signup.html">Sign Up</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- Header -->
+    <header>
+        <h1>StepUp Sneakers</h1>
+        <p>Sign up for an account</p>
+    </header>
+
+
+    <!-- Main Content -->
+    <main>
+
+        <section>
+
+            <h2>Sign Up</h2>
+
+            <form onsubmit="return validateForm()">
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">
+                        Username
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           id="username"
+                           name="username"
+                           placeholder="Enter user name"
+                           onfocusout="validate(this)">
+
+                    <div id="usernameMessage"></div>
+                </div>
+
+
+                <!-- Confirm Username -->
+                <div class="mb-3">
+                    <label for="confirmUsername" class="form-label">
+                        Confirm Username
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           id="confirmUsername"
+                           name="confirmUsername"
+                           placeholder="Confirm user name"
+                           onfocusout="validate(this)">
+
+                    <div id="confirmUsernameMessage"></div>
+                </div>
+
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">
+                        Email
+                    </label>
+
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           name="email"
+                           placeholder="Enter email"
+                           onfocusout="validate(this)">
+
+                    <div id="emailMessage"></div>
+                </div>
+
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        Password
+                    </label>
+
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           placeholder="Enter password"
+                           onfocusout="validate(this)">
+
+                    <div id="passwordMessage"></div>
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">
+                        Confirm Password
+                    </label>
+
+                    <input type="password"
+                           class="form-control"
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           placeholder="Confirm password"
+                           onfocusout="validate(this)">
+
+                    <div id="confirmPasswordMessage"></div>
+                </div>
+
+
+                <!-- Sign Up Button -->
+                <button type="submit" class="btn btn-primary">
+                    Sign Up
+                </button>
+
+            </form>
+
+
+            <!-- JSON Output -->
+            <h3 class="mt-4">JSON Document</h3>
+
+            <pre id="jsonOutput"></pre>
+
+        </section>
+
+
+        <!-- Aside -->
+        <aside>
+
+            <div class="offer">
+
+                <h2>Special Offer</h2>
+
+                <p>Get 10% off your first order.</p>
+
+                <p>Use code: <strong>FIRST10</strong></p>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>StepUp Sneakers</p>
+
+        <p>Email: info@stepupsneakers.com</p>
+
+        <p>&copy; 2026 StepUp Sneakers</p>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        function validate(obj) {
+
+            var message = document.getElementById(obj.id + "Message");
+
+            message.innerHTML = "";
+            obj.style.color = "#000000";
+            obj.style.borderColor = "";
+
+            // Check if field is empty
+            if (obj.value.trim() == "") {
+
+                message.innerHTML = "Field is required.";
+                message.style.color = "#FF0000";
+
+                obj.style.color = "#FF0000";
+                obj.style.borderColor = "#FF0000";
+
+                return false;
+            }
+
+
+            // Check email format
+            if (obj.id == "email") {
+
+                var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailFormat.test(obj.value)) {
+
+                    message.innerHTML = "Please enter a valid email address.";
+                    message.style.color = "#FF0000";
+
+                    obj.style.color = "#FF0000";
+                    obj.style.borderColor = "#FF0000";
+
+                    return false;
+                }
+            }
+
+
+            // Check usernames match
+            if (obj.id == "confirmUsername") {
+
+                var username = document.getElementById("username").value;
+
+                if (obj.value != username) {
+
+                    message.innerHTML = "Usernames do not match.";
+                    message.style.color = "#FF0000";
+
+                    obj.style.color = "#FF0000";
+                    obj.style.borderColor = "#FF0000";
+
+                    return false;
+                }
+            }
+
+
+            // Check passwords match
+            if (obj.id == "confirmPassword") {
+
+                var password = document.getElementById("password").value;
+
+                if (obj.value != password) {
+
+                    message.innerHTML = "Passwords do not match.";
+                    message.style.color = "#FF0000";
+
+                    obj.style.color = "#FF0000";
+                    obj.style.borderColor = "#FF0000";
+
+                    return false;
+                }
+            }
+
+
+            // Valid input
+            message.innerHTML = "";
+            obj.style.color = "#000000";
+            obj.style.borderColor = "";
+
+            return true;
+        }
+
+
+        function validateForm() {
+
+            var username = document.getElementById("username");
+            var confirmUsername = document.getElementById("confirmUsername");
+            var email = document.getElementById("email");
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirmPassword");
+
+            var validUsername = validate(username);
+            var validConfirmUsername = validate(confirmUsername);
+            var validEmail = validate(email);
+            var validPassword = validate(password);
+            var validConfirmPassword = validate(confirmPassword);
+
+            if (validUsername &&
+                validConfirmUsername &&
+                validEmail &&
+                validPassword &&
+                validConfirmPassword) {
+
+                // Create JSON document
+                var userData = {
+
+                    "email": email.value,
+                    "username": username.value,
+                    "confirmUsername": confirmUsername.value,
+                    "password": password.value,
+                    "confirmPassword": confirmPassword.value
+
+                };
+
+                // Display JSON on the page
+                document.getElementById("jsonOutput").textContent =
+                    JSON.stringify(userData, null, 4);
+
+                // Stop form from submitting/reloading
+                return false;
+            }
+
+            return false;
+        }
+
+    </script>
+
+</body>
+
+</html>
